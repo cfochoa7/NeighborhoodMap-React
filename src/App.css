@@ -1,0 +1,35 @@
+.app-header {
+  background-color: #000080;
+  color: #C41E3A;
+  height: 50px;
+  padding: 5px;
+  position :fixed;
+  top: 0;
+  width: 100%;
+  z-index:  1;
+}
+
+.app-title {
+  font-size: 2em;
+  text-align: center;
+  margin-top: -1px;
+  font-family: cursive;
+}
+
+
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+#map {
+  height: 100vh;
+
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
