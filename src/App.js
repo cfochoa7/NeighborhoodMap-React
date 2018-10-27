@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Locations from './component/locations';
 import './App.css';
 import axios from 'axios';
 
@@ -6,57 +7,48 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: '',
       venues: [],
       markers: [
         {
           title: '<center><b>University of Arizona</b></center>',
           hover: 'University of Arizona',
-          visible: true,
+        visible: true,
        location: {lat: 32.2319, lng: -110.9501},
     description: '<br/>Known for its involvment in the Mars Space Program'
      },
         {
           title: '<center><b>Arizona Mountain</b></center>',
           hover: 'Arizona Mountain',
-          visible: true,
+        visible: true,
        location: {lat: 32.2107, lng: -110.9917},
     description: '<br/>Local Tucson attraction'
      },
         {
           title: '<center><b>The Shanty</b></center>',
           hover: 'The Shanty',
-          visible: true,
+        visible: true,
        location: {lat: 32.2240, lng: -110.9654},
     description: '<br/>Local Tucson bar'
      },
         {
           title: '<center><b>Tucson Mall</b></center>',
           hover: 'Tucson Mall',
-          visible: true,
+        visible: true,
        location: {lat: 32.2885, lng: -110.9739},
     description: "<br/>Tucson's oldest mall venues"
      },
         {
           title: '<center><b>Dorado Golf Course</b></center>',
           hover: 'Dorado Golf Course',
-          visible: true,
+        visible: true,
        location: {lat: 32.2369, lng: -110.8498},
-   description: '<br/>Local venue for recration'
+    description: '<br/>Local venue for recration'
      }
 
       ]
     }
-    this.filter = this.filter.bind(this);
 
   };
-
-filter(event) {
-  const { value } = event.target;
-  this.setState ({
-    search: value
-  });
-}
 
 
   componentDidMount() {
@@ -115,14 +107,12 @@ initMap = () => {
         scale: 4
       }
     })
-
     marker.addListener('click', function() {
       infowindow.setContent(`${myMarkers.title}${myMarkers.description} `)
       infowindow.open(map, marker)
       })
 
     })
-
 
 
 }
@@ -156,30 +146,12 @@ initMap = () => {
                   <h1 className="app-title">Old Pueblo Guide</h1>
                </header>
 
-              <div className="search-area" id="search-box">
-               <input
-                  type="text"
-                  id="myInput"
-
-
+              <Locations
                   onInput={this.myFunction}
                   onChange={this.filter}
-
                   value={this.state.search}
-
-                  size="20"
-                  className="input"
-                  placeholder="Search Attraction..."
-                  />
-
-               <ul id="search-list">
-                <li><a>Arizona Mountain</a></li>
-                <li><a>Dorado Golf Course</a></li>
-                <li><a>The Shanty</a></li>
-                <li><a>Tucson Mall</a></li>
-                <li><a>University of Arizona</a></li>
-               </ul>
-              </div>
+                  match ={this.state.markers.name}
+              />
 
            </div>
        )
