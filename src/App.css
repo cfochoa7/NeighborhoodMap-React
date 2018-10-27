@@ -33,3 +33,33 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+
+.search-area {
+  font-size: 25px;
+  position: absolute;
+  margin-left: 8px;
+  top: 6%;
+}
+
+.input {
+  font-size: 0.8em;
+}
+
+#search-list {
+  padding: 0;
+  margin: 0;
+}
+
+#search-list li {
+  border: 1px solid black;
+  background-color: white;
+  padding: 5px;
+  font-size: 18px;
+  color: black;
+}
+
+#search-list li:hover:not(.header) {
+  background-color: grey;
+  cursor: pointer;
+}
