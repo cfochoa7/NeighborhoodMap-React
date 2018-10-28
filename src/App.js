@@ -7,49 +7,59 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      search: '',
       venues: [],
       markers: [
         {
-          title: '<center><b>University of Arizona</b></center>',
+          title: '<b>University of Arizona</b>',
           hover: 'University of Arizona',
         visible: true,
        location: {lat: 32.2319, lng: -110.9501},
     description: '<br/>Known for its involvment in the Mars Space Program'
      },
         {
-          title: '<center><b>Arizona Mountain</b></center>',
+          title: '<b>Arizona Mountain</b>',
           hover: 'Arizona Mountain',
         visible: true,
        location: {lat: 32.2107, lng: -110.9917},
     description: '<br/>Local Tucson attraction'
      },
         {
-          title: '<center><b>The Shanty</b></center>',
+          title: '<b>The Shanty</b>',
           hover: 'The Shanty',
         visible: true,
        location: {lat: 32.2240, lng: -110.9654},
+             id: "4bf58dd8d48988d116941735",
     description: '<br/>Local Tucson bar'
      },
         {
-          title: '<center><b>Tucson Mall</b></center>',
+          title: '<b>Tucson Mall</b>',
           hover: 'Tucson Mall',
         visible: true,
        location: {lat: 32.2885, lng: -110.9739},
     description: "<br/>Tucson's oldest mall venues"
      },
         {
-          title: '<center><b>Dorado Golf Course</b></center>',
+          title: '<b>Dorado Golf Course</b>',
           hover: 'Dorado Golf Course',
         visible: true,
        location: {lat: 32.2369, lng: -110.8498},
     description: '<br/>Local venue for recration'
      }
-
-      ]
+   ]
     }
+
+    this.filter = this.filter.bind(this);
 
   };
 
+
+  filter(event) {
+    const { value } = event.target;
+    this.setState ({
+      search: value
+    });
+  }
 
   componentDidMount() {
     this.renderMap()
@@ -95,10 +105,11 @@ initMap = () => {
 
   var infowindow = new window.google.maps.InfoWindow()
 
-  this.state.markers.map(myMarkers => {
-    var info = `${myMarkers.hover}`
+  this.state.markers.map(markers => {
+    var info = `${markers.hover}`
+    var visible = `${markers.visible}`
     var marker = new window.google.maps.Marker({
-      position: {lat: myMarkers.location.lat , lng: myMarkers.location.lng},
+      position: {lat: markers.location.lat , lng: markers.location.lng},
       title: info,
       map: map,
       icon: {
@@ -108,10 +119,10 @@ initMap = () => {
       }
     })
     marker.addListener('click', function() {
-      infowindow.setContent(`${myMarkers.title}${myMarkers.description} `)
+      infowindow.setContent(`${markers.title}${markers.description} `)
       infowindow.open(map, marker)
       })
-
+      return marker
     })
 
 
@@ -140,20 +151,11 @@ initMap = () => {
      render() {
 
        return (
-         <div>
-           <div id="map" />
-               <header className="app-header">
-                  <h1 className="app-title">Old Pueblo Guide</h1>
-               </header>
+         <Locations
+            onInput={this.myFunction}
+            onChange={this.filter}
 
-              <Locations
-                  onInput={this.myFunction}
-                  onChange={this.filter}
-                  value={this.state.search}
-                  match ={this.state.markers.name}
-              />
-
-           </div>
+          />
        )
      }
    }
