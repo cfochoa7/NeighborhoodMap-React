@@ -9,50 +9,11 @@ class App extends Component {
     this.state = {
       search: '',
       venues: [],
-      markers: [
-        {
-          title: '<b>University of Arizona</b>',
-          hover: 'University of Arizona',
-        visible: true,
-       location: {lat: 32.2319, lng: -110.9501},
-    description: '<br/>Known for its involvment in the Mars Space Program'
-     },
-        {
-          title: '<b>Arizona Mountain</b>',
-          hover: 'Arizona Mountain',
-        visible: true,
-       location: {lat: 32.2107, lng: -110.9917},
-    description: '<br/>Local Tucson attraction'
-     },
-        {
-          title: '<b>The Shanty</b>',
-          hover: 'The Shanty',
-        visible: true,
-       location: {lat: 32.2240, lng: -110.9654},
-             id: "4bf58dd8d48988d116941735",
-    description: '<br/>Local Tucson bar'
-     },
-        {
-          title: '<b>Tucson Mall</b>',
-          hover: 'Tucson Mall',
-        visible: true,
-       location: {lat: 32.2885, lng: -110.9739},
-    description: "<br/>Tucson's oldest mall venues"
-     },
-        {
-          title: '<b>Dorado Golf Course</b>',
-          hover: 'Dorado Golf Course',
-        visible: true,
-       location: {lat: 32.2369, lng: -110.8498},
-    description: '<br/>Local venue for recration'
-     }
-   ]
     }
 
     this.filter = this.filter.bind(this);
 
   };
-
 
   filter(event) {
     const { value } = event.target;
@@ -61,8 +22,8 @@ class App extends Component {
     });
   }
 
+
   componentDidMount() {
-    this.renderMap()
     this.getVenues()
   }
 
@@ -75,11 +36,11 @@ class App extends Component {
 
   getVenues = () => {
     const endPoint = 'https://api.foursquare.com/v2/venues/explore?'
-    const photos = 'https://api.foursquare.com/v2/photos/add?'
     const parameters = {
       client_id: 'Y4HOWLASE0FWJ23LPMWLWMINXCXXGS0F4HEN0RDJSVP1U40U',
       client_secret: 'WOWYTORM2EP1JLDIO03SB1KMMYXO4BABEIMTSFBA55PJPCZT',
-      query: 'The Shanty',
+      query: 'YMCA',
+      limit: 5,
       near: 'Tucson',
       v: '20182210'
     }
@@ -87,7 +48,7 @@ class App extends Component {
   .then(response => {
     this.setState({
       venues: response.data.response.groups[0].items
-    })
+    },this.renderMap())
   })
   .catch(error => {
     console.log('ERROR! ' + error)
@@ -105,31 +66,34 @@ initMap = () => {
 
   var infowindow = new window.google.maps.InfoWindow()
 
-  this.state.markers.map(markers => {
-    var info = `${markers.hover}`
-    var visible = `${markers.visible}`
-    var marker = new window.google.maps.Marker({
-      position: {lat: markers.location.lat , lng: markers.location.lng},
-      title: info,
-      map: map,
-      icon: {
-        path: window.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-        strokeColor: 'blue',
-        scale: 4
-      }
-    })
-    marker.addListener('click', function() {
-      infowindow.setContent(`${markers.title}${markers.description} `)
-      infowindow.open(map, marker)
+      this.state.venues.map(venue => {
+        var address = `${venue.venue.location.address}`
+        var contentString = `${venue.venue.name}`
+
+        var marker = new window.google.maps.Marker({
+          position: {lat: venue.venue.location.lat , lng: venue.venue.location.lng},
+          map: map,
+          title: venue.venue.name,
+          icon: {
+            path: window.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+            strokeColor: 'blue',
+            scale: 5
+          }
+        })
+
+        marker.addListener('click', function() {
+          infowindow.setContent('<b>' + contentString + '</b> <br>'  + address)
+          infowindow.open(map, marker)
+        })
+
       })
-      return marker
-    })
 
 
-}
+
+    }
 
 
- myFunction = () => {
+ /*myFunction = () => {
     var input, filter, ul, li, a, i;
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
@@ -143,7 +107,7 @@ initMap = () => {
             li[i].style.display = "none";
         }
     }
-}
+}*/
 
 
 
@@ -154,6 +118,8 @@ initMap = () => {
          <Locations
             onInput={this.myFunction}
             onChange={this.filter}
+            venues={this.state.venues}
+
 
           />
        )

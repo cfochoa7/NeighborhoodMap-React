@@ -10,7 +10,7 @@ class Locations extends Component {
       <div>
         <div id="map" />
             <header className="app-header">
-               <h1 className="app-title">Old Pueblo Guide</h1>
+               <h1 className="app-title">Gym Locations</h1>
             </header>
 
             <div className="search-area" id="search-box">
@@ -23,18 +23,17 @@ class Locations extends Component {
 
 
 
+
                 size="20"
                 className="input"
                 placeholder="Search Attraction..."
                 />
 
-             <ul id="search-list">
-              <li><a>Arizona Mountain</a></li>
-              <li><a>Dorado Golf Course</a></li>
-              <li><a>The Shanty</a></li>
-              <li><a>Tucson Mall</a></li>
-              <li><a>University of Arizona</a></li>
-             </ul>
+                <ul id="search-list">
+                    {this.props.venues.forEach((venue, index) => (
+                      <li key={index}>{venue.venue.name}</li>
+                    ))}
+                </ul>
             </div>
 
         </div>
