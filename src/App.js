@@ -120,6 +120,7 @@ initMap = () => {
             onChange={this.filter}
             venues={this.state.venues}
 
+            {...this.state}
 
           />
        )

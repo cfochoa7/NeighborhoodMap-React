@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+import VenueList from './VenueList';
 
 class Locations extends Component {
 
@@ -14,9 +15,10 @@ class Locations extends Component {
             </header>
 
             <div className="search-area" id="search-box">
+
               <input
-                type="text"
-                id="myInput"
+                type={"text"}
+                id={"myInput"}
 
                 onInput={this.props.onInput}
                 onChange={this.props.onChange}
@@ -26,14 +28,11 @@ class Locations extends Component {
 
                 size="20"
                 className="input"
-                placeholder="Search Attraction..."
+                placeholder={"Search Attraction..."}
                 />
+                <VenueList {...this.props} />
 
-                <ul id="search-list">
-                    {this.props.venues.forEach((venue, index) => (
-                      <li key={index}>{venue.venue.name}</li>
-                    ))}
-                </ul>
+
             </div>
 
         </div>
@@ -45,3 +44,9 @@ class Locations extends Component {
 
 
 export default Locations;
+
+/*<ul id="search-list">
+      {this.props.venues.forEach((venue, index) => (
+        <li key={index}>{venue.venue.name}</li>
+      ))}
+  </ul>*/
