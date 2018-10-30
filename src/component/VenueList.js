@@ -5,14 +5,18 @@ class VenueList extends Component {
   render() {
     return (
       <div id= 'venueList'>
-      <ol className = 'venueList'>
+        <ul className = 'venueList'>
+
         {this.props.venues &&
         this.props.venues.map((venue, index) => (
           <ListItem
-          key={index} {...venue} />
+            key={index}
+            venue={venue}
+            />
         ))}
-        </ol>
-        </div>
+
+        </ul>
+      </div>
     );
   }
 }

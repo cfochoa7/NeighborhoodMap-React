@@ -2,12 +2,17 @@ import React, {Component} from 'react';
 
 class ListItem extends Component {
   render() {
+      console.log(this.props.venue);
     return (
       <div id= 'listItem'>
 
-      <li className = 'listItem'>
-        {this.props.name}
-      </li>
+        <li className="listItem"
+            tabIndex='0'
+            role='button'
+            aria-label='Place Location'
+            >
+            {this.props.venue.venue.name}
+            </li>
 
       </div>
     )

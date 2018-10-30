@@ -8,19 +8,9 @@ class App extends Component {
     super(props);
     this.state = {
       search: '',
-      venues: [],
+      venues: []
     }
-
-    this.filter = this.filter.bind(this);
-
   };
-
-  filter(event) {
-    const { value } = event.target;
-    this.setState ({
-      search: value
-    });
-  }
 
 
   componentDidMount() {
@@ -39,7 +29,7 @@ class App extends Component {
     const parameters = {
       client_id: 'Y4HOWLASE0FWJ23LPMWLWMINXCXXGS0F4HEN0RDJSVP1U40U',
       client_secret: 'WOWYTORM2EP1JLDIO03SB1KMMYXO4BABEIMTSFBA55PJPCZT',
-      query: 'YMCA',
+      query: 'attractions',
       limit: 5,
       near: 'Tucson',
       v: '20182210'
@@ -61,7 +51,7 @@ initMap = () => {
 
   var map = new window.google.maps.Map(document.getElementById('map'), {
     center: {lat: 32.2226, lng: -110.9747},
-    zoom: 12
+    zoom: 11
   })
 
   var infowindow = new window.google.maps.InfoWindow()
@@ -74,40 +64,51 @@ initMap = () => {
           position: {lat: venue.venue.location.lat , lng: venue.venue.location.lng},
           map: map,
           title: venue.venue.name,
+          animation: window.google.maps.Animation.DROP,
           icon: {
             path: window.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
             strokeColor: 'blue',
             scale: 5
           }
-        })
+        });
+
+        marker.addListener('click', () => {
+            if (marker.getAnimation() !== null) {
+              marker.setAnimation(null);
+            } else {
+              marker.setAnimation(null);
+            }
+          })
 
         marker.addListener('click', function() {
           infowindow.setContent('<b>' + contentString + '</b> <br>'  + address)
           infowindow.open(map, marker)
         })
+        return marker
 
       })
 
-
-
     }
 
 
- /*myFunction = () => {
-    var input, filter, ul, li, a, i;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("search-list");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
+
+filter= () => {
+  let input, inputVal, a, i, filtered;
+  input = document.querySelector("#search");
+  inputVal = input.value.toLowerCase();
+  a = document.querySelectorAll(".listItem");
+
+  for (i = 0; i < a.length; i++) {
+    filtered = a[i];
+
+    if (filtered.innerHTML.toLowerCase().indexOf(inputVal) > -1) {
+      filtered.style.display = "";
+    } else {
+      filtered.style.display = "none";
     }
-}*/
+  }
+};
+
 
 
 
@@ -116,9 +117,7 @@ initMap = () => {
 
        return (
          <Locations
-            onInput={this.myFunction}
-            onChange={this.filter}
-            venues={this.state.venues}
+            filter={this.filter}
 
             {...this.state}
 

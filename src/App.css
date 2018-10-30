@@ -44,10 +44,12 @@ html, body {
 
 .input {
   font-size: 0.8em;
+  width: 100%;
+
 }
 
 #venueList {
-  margin-left: -15px;
+  margin-left: -40px;
   margin-top: -20px;
 }
 
@@ -61,6 +63,7 @@ html, body {
   padding: 5px;
   font-size: 18px;
   color: black;
+  list-style: none;
 }
 
 #listItem li:hover:not(.header) {

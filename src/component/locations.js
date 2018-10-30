@@ -11,24 +11,27 @@ class Locations extends Component {
       <div>
         <div id="map" />
             <header className="app-header">
-               <h1 className="app-title">Gym Locations</h1>
+               <h1 className="app-title">Old Pueblo Guide</h1>
             </header>
 
             <div className="search-area" id="search-box">
 
               <input
-                type={"text"}
-                id={"myInput"}
+                type='text'
+                id="search"
+                name="search"
+
+                value={this.props.value}
 
                 onInput={this.props.onInput}
-                onChange={this.props.onChange}
+                onChange={() => {
+                              this.props.filter();
 
-
-
+                            }}
 
                 size="20"
                 className="input"
-                placeholder={"Search Attraction..."}
+                placeholder={"Search Local Attractions..."}
                 />
                 <VenueList {...this.props} />
 
