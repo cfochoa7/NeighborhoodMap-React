@@ -24,9 +24,9 @@ class Locations extends Component {
                 value={this.props.value}
 
                 onInput={this.props.onInput}
-                onChange={() => {
-                               this.props.filter();
-                               this.props.filterVenues();
+                 onChange={(e) => {
+                               this.props.filter(e.target.value);
+                               this.props.filterVenues(e.target.value);
 
                              }}
                 size="20"
