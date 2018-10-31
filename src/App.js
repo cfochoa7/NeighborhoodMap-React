@@ -125,7 +125,7 @@ filterVenues = (search) => {
   this.state.venues.forEach(venue => {
     console.log(venue);
     venue.name.toLowerCase().includes( search.toLowerCase() ) === true ?
-    venue.visible(true) :
+    venue.setVisible(true) :
     venue.setVisible(false);
   });
 
