@@ -25,10 +25,10 @@ class Locations extends Component {
 
                 onInput={this.props.onInput}
                 onChange={() => {
-                              this.props.filter();
+                               this.props.filter();
+                               this.props.filterVenues();
 
-                            }}
-
+                             }}
                 size="20"
                 className="input"
                 placeholder={"Search Local Attractions..."}

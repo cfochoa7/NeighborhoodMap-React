@@ -8,10 +8,19 @@ class App extends Component {
     super(props);
     this.state = {
       search: '',
-      venues: []
+      venues: [],
+      venue: []
     }
+    this.filtered = this.filtered.bind(this);
+
   };
 
+  filtered(event) {
+     const { value } = event.target;
+     this.setState ({
+       search: value
+     });
+   }
 
   componentDidMount() {
     this.getVenues()
@@ -72,6 +81,8 @@ initMap = () => {
           }
         });
 
+
+
         marker.addListener('click', () => {
             if (marker.getAnimation() !== null) {
               marker.setAnimation(null);
@@ -84,7 +95,7 @@ initMap = () => {
           infowindow.setContent('<b>' + contentString + '</b> <br>'  + address)
           infowindow.open(map, marker)
         })
-        return marker
+        return venue
 
       })
 
@@ -92,7 +103,7 @@ initMap = () => {
 
 
 
-filter= () => {
+filter = () => {
   let input, inputVal, a, i, filtered;
   input = document.querySelector("#search");
   inputVal = input.value.toLowerCase();
@@ -107,8 +118,19 @@ filter= () => {
       filtered.style.display = "none";
     }
   }
+
 };
 
+filterVenues = (search) => {
+  this.state.venues.forEach(venue => {
+    console.log(venue);
+    venue.name.toLowerCase().includes( search.toLowerCase() ) === true ?
+    venue.visible(true) :
+    venue.setVisible(false);
+  });
+
+  this.setState({ search });
+}
 
 
 
@@ -118,6 +140,8 @@ filter= () => {
        return (
          <Locations
             filter={this.filter}
+            filterVenues={(e) => { this.filterVenues(e.target.value) }}
+            onInput={this.filtered}
 
             {...this.state}
 
