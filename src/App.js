@@ -140,7 +140,7 @@ filterVenues = (search) => {
        return (
          <Locations
             filter={this.filter}
-            filterVenues={(e) => { this.filterVenues(e.target.value) }}
+            filterVenues={this.filterVenues}
             onInput={this.filtered}
 
             {...this.state}
