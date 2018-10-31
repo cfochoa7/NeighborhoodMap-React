@@ -8,8 +8,7 @@ class App extends Component {
     super(props);
     this.state = {
       search: '',
-      venues: [],
-      venue: []
+      venues: []
     }
     this.filtered = this.filtered.bind(this);
 
