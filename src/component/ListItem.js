@@ -7,7 +7,7 @@ class ListItem extends Component {
     return (
       <div id= 'listItem'>
 
-        <li className="lItem"
+        <li className="listItem"
             tabIndex='0'
             type='button'
             aria-label='Place Location'
