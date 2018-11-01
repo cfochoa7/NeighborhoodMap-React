@@ -33,7 +33,9 @@ class Locations extends Component {
                 className="input"
                 placeholder={"Search Local Attractions..."}
                 />
-                <VenueList {...this.props} />
+                <VenueList
+
+                  {...this.props} />
 
 
             </div>

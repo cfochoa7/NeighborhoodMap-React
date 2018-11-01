@@ -11,15 +11,8 @@ class App extends Component {
       venues: [],
       markers: []
     }
-    this.filtered = this.filtered.bind(this);
   };
 
-  filtered(event) {
-     const { value } = event.target;
-     this.setState ({
-       search: value
-     });
-   }
 
   componentDidMount() {
     this.getVenues()
@@ -92,6 +85,8 @@ initMap = () => {
           infowindow.open(map, marker)
         });
 
+
+
         allMarkers.push(marker);
         return venue;
 
@@ -118,6 +113,7 @@ filter = () => {
       filtered.style.display = "";
     } else {
       filtered.style.display = "none";
+
     }
   }
 
@@ -126,32 +122,30 @@ filter = () => {
 filterVenues = search => {
     this.state.venues.forEach(venue => {
       console.log(venue);
-      if (venue.venue.name.toLowerCase().includes(search.toLowerCase())) {
 
+      if (venue.venue.name.toLowerCase().includes(search.toLowerCase())) {
         this.state.markers.forEach(marker => {
+
           if (marker.title === venue.venue.name) {
             console.log("match");
-
             marker.setVisible(true);
           } else {
             marker.setVisible(false);
           }
 
-if(search === "") {
-this.state.venues.map((venues) =>
-  marker.setVisible(true));
-}
-
+          if(search === "") {
+            this.state.venues.map( (venues) =>
+            marker.setVisible(true));
+          }
         });
       }
-    //   venue.venue.name.toLowerCase().includes(search.toLowerCase()) === true
-      //   ? venue.setVisible(true)
-      //   : venue.setVisible(false);
-    });
+  });
+};
 
-    this.setState({ search });
-  };
 
+handleClick = () => {
+  console.log('clicks');
+}
 
 
 
@@ -159,10 +153,10 @@ this.state.venues.map((venues) =>
 
        return (
          <Locations
+            onInput={this.filtered}
             filter={this.filter}
             filterVenues={this.filterVenues}
-            onInput={this.filtered}
-
+            press={this.handleClick}
             {...this.state}
 
           />

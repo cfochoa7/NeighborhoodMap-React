@@ -5,13 +5,14 @@ class VenueList extends Component {
   render() {
     return (
       <div id= 'venueList'>
-        <ul className = 'venuListMenu'>
+        <ul className = 'vList'>
 
         {this.props.venues &&
         this.props.venues.map((venue, index) => (
           <ListItem
             key={index}
             venue={venue}
+            click={this.props.press}
             />
         ))}
 

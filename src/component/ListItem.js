@@ -1,15 +1,18 @@
 import React, {Component} from 'react';
 
 class ListItem extends Component {
+
+
   render() {
     return (
       <div id= 'listItem'>
 
-        <li className="listItem"
+        <li className="lItem"
             tabIndex='0'
-            role='button'
+            type='button'
             aria-label='Place Location'
-            >
+            onClick={this.props.click}
+        >
 
             {this.props.venue.venue.name}
             </li>
