@@ -138,7 +138,8 @@ filterVenues = search => {
           }
 
 if(search === "") {
-this.state.venues.forEach((venues) => marker.setVisible(true));
+this.state.venues.map((venues) =>
+  marker.setVisible(true));
 }
 
         });
