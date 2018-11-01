@@ -24,7 +24,7 @@ class Locations extends Component {
                 value={this.props.value}
 
                 onInput={this.props.onInput}
-                 onChange={(e) => {
+                onChange={(e) => {
                                this.props.filter(e.target.value);
                                this.props.filterVenues(e.target.value);
 
@@ -47,9 +47,3 @@ class Locations extends Component {
 
 
 export default Locations;
-
-/*<ul id="search-list">
-      {this.props.venues.forEach((venue, index) => (
-        <li key={index}>{venue.venue.name}</li>
-      ))}
-  </ul>*/

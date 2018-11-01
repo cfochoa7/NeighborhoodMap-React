@@ -10,6 +10,7 @@ class ListItem extends Component {
             role='button'
             aria-label='Place Location'
             >
+
             {this.props.venue.venue.name}
             </li>
 

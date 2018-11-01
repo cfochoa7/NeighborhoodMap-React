@@ -5,7 +5,7 @@ class VenueList extends Component {
   render() {
     return (
       <div id= 'venueList'>
-        <ul className = 'venueList'>
+        <ul className = 'venuListMenu'>
 
         {this.props.venues &&
         this.props.venues.map((venue, index) => (

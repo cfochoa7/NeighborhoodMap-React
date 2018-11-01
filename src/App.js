@@ -8,10 +8,10 @@ class App extends Component {
     super(props);
     this.state = {
       search: '',
-      venues: []
+      venues: [],
+      markers: []
     }
     this.filtered = this.filtered.bind(this);
-
   };
 
   filtered(event) {
@@ -54,7 +54,6 @@ class App extends Component {
 }
 
 
-
 initMap = () => {
 
   var map = new window.google.maps.Map(document.getElementById('map'), {
@@ -63,6 +62,8 @@ initMap = () => {
   })
 
   var infowindow = new window.google.maps.InfoWindow()
+
+  const allMarkers = [];
 
       this.state.venues.map(venue => {
         var address = `${venue.venue.location.address}`
@@ -79,9 +80,6 @@ initMap = () => {
             scale: 5
           }
         });
-
-
-
         marker.addListener('click', () => {
             if (marker.getAnimation() !== null) {
               marker.setAnimation(null);
@@ -89,16 +87,21 @@ initMap = () => {
               marker.setAnimation(null);
             }
           })
-
         marker.addListener('click', function() {
           infowindow.setContent('<b>' + contentString + '</b> <br>'  + address)
           infowindow.open(map, marker)
-        })
-        return venue
+        });
 
-      })
+        allMarkers.push(marker);
+        return venue;
 
-    }
+      });
+
+      this.setState({
+        markers: allMarkers
+      });
+
+}
 
 
 
@@ -120,16 +123,33 @@ filter = () => {
 
 };
 
-filterVenues = (search) => {
-  this.state.venues.forEach(venue => {
-    console.log(venue);
-    venue.name.toLowerCase().includes( search.toLowerCase() ) === true ?
-    venue.setVisible(true) :
-    venue.setVisible(false);
-  });
+filterVenues = search => {
+    this.state.venues.forEach(venue => {
+      console.log(venue);
+      if (venue.venue.name.toLowerCase().includes(search.toLowerCase())) {
 
-  this.setState({ search });
+        this.state.markers.forEach(marker => {
+          if (marker.title === venue.venue.name) {
+            console.log("match");
+
+            marker.setVisible(true);
+          } else {
+            marker.setVisible(false);
+          }
+
+if(search === "") {
+this.state.venues.forEach((venues) => marker.setVisible(true));
 }
+
+        });
+      }
+    //   venue.venue.name.toLowerCase().includes(search.toLowerCase()) === true
+      //   ? venue.setVisible(true)
+      //   : venue.setVisible(false);
+    });
+
+    this.setState({ search });
+  };
 
 
 
