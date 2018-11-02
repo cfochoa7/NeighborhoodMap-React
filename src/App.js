@@ -8,8 +8,8 @@ class App extends Component {
     super(props);
     this.state = {
       search: '',
-      //map: null,
-      //infoWindow: null,
+      map: null,
+      infoWindow: null,
       venues: [],
       searchedLocations: [],
       markers: []
