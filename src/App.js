@@ -147,10 +147,10 @@ filterVenues = search => {
 };
 
 
-handleClick =(venues) => {
-  let selectedMarker = this.state.markers.find(marker => marker.title);
-      console.log(selectedMarker); //prints the marker
-      window.google.maps.event.trigger(selectedMarker, 'click');
+handleClick =(venue) => {
+  let selected = this.state.markers.find(marker => marker.id === venue.id);
+      console.log(selected); //prints the marker
+      window.google.maps.event.trigger(selected, 'click');
     }
 
 
