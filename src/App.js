@@ -8,7 +8,10 @@ class App extends Component {
     super(props);
     this.state = {
       search: '',
+      //map: null,
+      //infoWindow: null,
       venues: [],
+      searchedLocations: [],
       markers: []
     }
   };
@@ -38,7 +41,8 @@ class App extends Component {
   axios.get(endPoint + new URLSearchParams(parameters))
   .then(response => {
     this.setState({
-      venues: response.data.response.groups[0].items
+      venues: response.data.response.groups[0].items,
+      searchedLocations: response.data.response.groups[0].items
     },this.renderMap())
   })
   .catch(error => {
@@ -82,14 +86,11 @@ initMap = () => {
           })
         marker.addListener('click', function() {
           infowindow.setContent('<b>' + contentString + '</b> <br>'  + address)
-          infowindow.open(map, marker)
+          infowindow.open(map, marker);
         });
-
-
 
         allMarkers.push(marker);
         return venue;
-
       });
 
       this.setState({
@@ -98,9 +99,7 @@ initMap = () => {
 
 }
 
-
-
-filter = () => {
+/*filter = () => {
   let input, inputVal, a, i, filtered;
   input = document.querySelector("#search");
   inputVal = input.value.toLowerCase();
@@ -117,35 +116,42 @@ filter = () => {
     }
   }
 
-};
+};*/
 
 filterVenues = search => {
-    this.state.venues.forEach(venue => {
-      console.log(venue);
-
-      if (venue.venue.name.toLowerCase().includes(search.toLowerCase())) {
-        this.state.markers.forEach(marker => {
-
-          if (marker.title === venue.venue.name) {
-            console.log("match");
-            marker.setVisible(true);
-          } else {
-            marker.setVisible(false);
-          }
-
-          if(search === "") {
-            this.state.venues.map( (venues) =>
-            marker.setVisible(true));
-          }
-        });
-      }
+  const searchedLocations = [];
+  this.state.venues.forEach(venue => {
+    if (venue.venue.name.toLowerCase().includes( search.toLowerCase() ) ) {
+      this.state.markers.forEach(marker => {
+        if (marker.title === venue.venue.name) {
+          marker.setVisible(true);
+          searchedLocations.push(venue);
+        } else {
+          marker.setVisible(false);
+        }
+      });
+      this.setState({
+        search: search,
+        searchedLocations: searchedLocations
+      });
+    }
+    if (search === "") {
+      this.setState({
+        searchedLocations: this.state.venues
+      });
+      this.state.markers.forEach(marker => {
+        marker.setVisible(true);
+      });
+    }
   });
 };
 
 
-handleClick = () => {
-  console.log('clicks');
-}
+handleClick =(venues) => {
+  let selectedMarker = this.state.markers.find(marker => marker.title);
+      console.log(selectedMarker); //prints the marker
+      window.google.maps.event.trigger(selectedMarker, 'click');
+    }
 
 
 
@@ -153,8 +159,7 @@ handleClick = () => {
 
        return (
          <Locations
-            onInput={this.filtered}
-            filter={this.filter}
+            //filter={this.filter}
             filterVenues={this.filterVenues}
             press={this.handleClick}
             {...this.state}

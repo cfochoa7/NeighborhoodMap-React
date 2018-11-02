@@ -3,10 +3,7 @@ import '../App.css';
 import VenueList from './VenueList';
 
 class Locations extends Component {
-
-
   render() {
-
     return(
       <div>
         <div id="map" />
@@ -21,11 +18,11 @@ class Locations extends Component {
                 id="search"
                 name="search"
 
-                value={this.props.value}
+              //  value={this.props.value}
 
                 onInput={this.props.onInput}
                 onChange={(e) => {
-                               this.props.filter(e.target.value);
+                               //this.props.filter(e.target.value);
                                this.props.filterVenues(e.target.value);
 
                              }}

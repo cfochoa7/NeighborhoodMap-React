@@ -7,8 +7,8 @@ class VenueList extends Component {
       <div id= 'venueList'>
         <ul className = 'vList'>
 
-        {this.props.venues &&
-        this.props.venues.map((venue, index) => (
+        {this.props.searchedLocations &&
+        this.props.searchedLocations.map((venue, index) => (
           <ListItem
             key={index}
             venue={venue}
