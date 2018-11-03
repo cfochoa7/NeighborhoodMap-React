@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import Locations from './component/locations';
+//import Locations from './component/locations';
 import './App.css';
+import VenueList from './component/VenueList';
+
 import axios from 'axios';
 
 class App extends Component {
@@ -8,8 +10,8 @@ class App extends Component {
     super(props);
     this.state = {
       search: '',
-      map: null,
-      infoWindow: null,
+      //map: null,
+      //infoWindow: null,
       venues: [],
       searchedLocations: [],
       markers: []
@@ -99,29 +101,11 @@ initMap = () => {
 
 }
 
-/*filter = () => {
-  let input, inputVal, a, i, filtered;
-  input = document.querySelector("#search");
-  inputVal = input.value.toLowerCase();
-  a = document.querySelectorAll(".listItem");
-
-  for (i = 0; i < a.length; i++) {
-    filtered = a[i];
-
-    if (filtered.innerHTML.toLowerCase().indexOf(inputVal) > -1) {
-      filtered.style.display = "";
-    } else {
-      filtered.style.display = "none";
-
-    }
-  }
-
-};*/
 
 filterVenues = search => {
   const searchedLocations = [];
   this.state.venues.forEach(venue => {
-    if (venue.venue.name.toLowerCase().includes( search.toLowerCase() ) ) {
+    if (venue.venue.name.toLowerCase().includes( search.toLowerCase() )  ) {
       this.state.markers.forEach(marker => {
         if (marker.title === venue.venue.name) {
           marker.setVisible(true);
@@ -146,25 +130,46 @@ filterVenues = search => {
   });
 };
 
-
 handleClick =(venue) => {
-  let selected = this.state.markers.find(marker => marker.id === venue.id);
-      console.log(selected); //prints the marker
+  let selected = this.state.markers.find(marker => marker.title === venue.name);
       window.google.maps.event.trigger(selected, 'click');
     }
 
 
 
      render() {
-
        return (
-         <Locations
-            //filter={this.filter}
-            filterVenues={this.filterVenues}
-            press={this.handleClick}
-            {...this.state}
+         <div>
+           <div id="map" />
+               <header className="app-header">
+                  <h1 className="app-title">Old Pueblo Guide</h1>
+               </header>
 
-          />
+               <div className="search-area" id="search-box">
+
+                 <input
+                   type='text'
+                   id="search"
+                   name="search"
+
+
+                   onChange={(e) => {
+                                  this.filterVenues(e.target.value);
+
+                                }}
+                   size="20"
+                   className="input"
+                   placeholder={"Search Local Attractions..."}
+                   />
+                   <VenueList
+                   press={this.handleClick}
+
+
+                     {...this.state} />
+
+
+               </div>
+           </div>
        )
      }
    }
