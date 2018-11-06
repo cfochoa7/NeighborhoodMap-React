@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 
 class ListItem extends Component {
-
-
   render() {
     return (
       <div id= 'listItem'>
@@ -13,7 +11,6 @@ class ListItem extends Component {
             aria-label='Place Location'
             onClick={this.props.click}
         >
-
             {this.props.venue.venue.name}
             </li>
 

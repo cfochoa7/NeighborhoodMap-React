@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-//import Locations from './component/locations';
-import './App.css';
 import VenueList from './component/VenueList';
-
+import './App.css';
 import axios from 'axios';
 
 class App extends Component {
@@ -10,14 +8,11 @@ class App extends Component {
     super(props);
     this.state = {
       search: '',
-      //map: null,
-      //infoWindow: null,
       venues: [],
       searchedLocations: [],
       markers: []
     }
   };
-
 
   componentDidMount() {
     this.getVenues()
@@ -27,8 +22,6 @@ class App extends Component {
     loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAQkHIBWjyRGJy2EsEu8DZ0jPBBvWC1b9s&callback=initMap")
     window.initMap = this.initMap
   }
-
-
 
   getVenues = () => {
     const endPoint = 'https://api.foursquare.com/v2/venues/explore?'
@@ -40,6 +33,7 @@ class App extends Component {
       near: 'Tucson',
       v: '20182210'
     }
+
   axios.get(endPoint + new URLSearchParams(parameters))
   .then(response => {
     this.setState({
@@ -48,30 +42,28 @@ class App extends Component {
     },this.renderMap())
   })
   .catch(error => {
-    console.log('ERROR! ' + error)
+    console.log(error)
   })
 }
 
 
 initMap = () => {
 
-  var map = new window.google.maps.Map(document.getElementById('map'), {
+  let map = new window.google.maps.Map(document.getElementById('map'), {
     center: {lat: 32.2226, lng: -110.9747},
-    zoom: 11
+    zoom: 10
   })
 
-  var infowindow = new window.google.maps.InfoWindow()
-
-  const allMarkers = [];
+  let infowindow = new window.google.maps.InfoWindow()
+  let allMarkers = [];
 
       this.state.venues.map(venue => {
-        var address = `${venue.venue.location.address}`
+        var address = `${venue.venue.location.address  + '<br> <a href = "https://foursquare.com/">Provided by FOURSQUARE'}`
         var contentString = `${venue.venue.name}`
-
         var marker = new window.google.maps.Marker({
           position: {lat: venue.venue.location.lat , lng: venue.venue.location.lng},
           map: map,
-          title: venue.venue.name,
+          title: contentString,
           animation: window.google.maps.Animation.DROP,
           icon: {
             path: window.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
@@ -79,19 +71,13 @@ initMap = () => {
             scale: 5
           }
         });
-        marker.addListener('click', () => {
-            if (marker.getAnimation() !== null) {
-              marker.setAnimation(null);
-            } else {
-              marker.setAnimation(null);
-            }
-          })
+
         marker.addListener('click', function() {
-          infowindow.setContent('<b>' + contentString + '</b> <br>'  + address)
+          infowindow.setContent('<b>' + contentString + '</b> <br>'  + address);
           infowindow.open(map, marker);
         });
 
-        allMarkers.push(marker);
+        allMarkers[allMarkers.length] = marker;
         return venue;
       });
 
@@ -103,39 +89,46 @@ initMap = () => {
 
 
 filterVenues = search => {
+  const access = this.state;
   const searchedLocations = [];
-  this.state.venues.forEach(venue => {
-    if (venue.venue.name.toLowerCase().includes( search.toLowerCase() )  ) {
-      this.state.markers.forEach(marker => {
-        if (marker.title === venue.venue.name) {
+
+  access.venues.map(venue => {
+    if (venue.venue.name.toLocaleLowerCase().startsWith(search.toLocaleLowerCase())) {
+      access.markers.map(marker => {
+
+        if (marker.title === venue.venue.name && true) {
           marker.setVisible(true);
-          searchedLocations.push(venue);
+          searchedLocations[searchedLocations.length] = venue;
+
         } else {
           marker.setVisible(false);
         }
+        return marker;
       });
+
       this.setState({
-        search: search,
-        searchedLocations: searchedLocations
+        search, searchedLocations
       });
     }
+
     if (search === "") {
       this.setState({
-        searchedLocations: this.state.venues
+        searchedLocations: access.venues
       });
-      this.state.markers.forEach(marker => {
+      access.markers.forEach(marker => {
         marker.setVisible(true);
       });
     }
+
+    return venue;
   });
 };
 
-handleClick =(venue) => {
-  let selected = this.state.markers.find(marker => marker.title === venue.name);
-      window.google.maps.event.trigger(selected, 'click');
+handleClick = (venue) => {
+  let access = window.google.maps.event;
+  let marked = this.state.markers.find(marker => marker.title === venue.name);
+  access.trigger(marked, 'click');
     }
-
-
 
      render() {
        return (
@@ -151,21 +144,17 @@ handleClick =(venue) => {
                    type='text'
                    id="search"
                    name="search"
-
-
-                   onChange={(e) => {
-                                  this.filterVenues(e.target.value);
-
-                                }}
                    size="20"
                    className="input"
                    placeholder={"Search Local Attractions..."}
-                   />
+                   onChange={(e) => {
+                                  this.filterVenues(e.target.value);
+                                }}
+                  />
                    <VenueList
                    press={this.handleClick}
-
-
-                     {...this.state} />
+                         {...this.state}
+                    />
 
 
                </div>

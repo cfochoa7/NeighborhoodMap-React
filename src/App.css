@@ -38,6 +38,7 @@ html, body {
 .search-area {
   font-size: 25px;
   position: absolute;
+  padding-top: 25px;
   margin-left: 5px;
   top: 6%;
 }

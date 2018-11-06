@@ -11,11 +11,10 @@ class VenueList extends Component {
         this.props.searchedLocations.map((venue, index) => (
 
           <ListItem
-            key={index}
+            key={venue.venue.name}
             venue={venue}
-
             /*Assisted by Mayguen Ojeda from FEND-proj-7*/
-            click={() =>
+            click={ () =>
                this.props.press(venue.venue)
              }
           />
