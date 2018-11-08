@@ -103,7 +103,7 @@ as well as the venue being returned.*/
 }
 
 /**/
-//
+// Look at !== for 115
 filterVenues = search => {
   const access = this.state;
   const places = [];
@@ -126,7 +126,8 @@ filterVenues = search => {
       });
     }
 
-/**/
+/*When the search bar is empty the state's venues is updated making the listed venues appear to the user.
+The markers will reappear to the user through the use of '.some()'.*/
     if (search === "") {
       this.setState({
         places: access.venues
@@ -135,12 +136,12 @@ filterVenues = search => {
         return marker.setVisible(true);
       });
     }
-
     return venue;
   });
 };
 
-/**/
+/*The handleClick function will will use 'window.google.maps.event' that will match the listed venue's name with the marker's title.
+The user clicks on the venue in order to activate the marker's infoWindow on the map.*/ //.some with return and {}
 //https://developers.google.com/maps/documentation/javascript/events
 handleClick = (venue) => {
   let access = window.google.maps.event;
