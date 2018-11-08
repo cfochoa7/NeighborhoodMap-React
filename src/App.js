@@ -54,11 +54,11 @@ map = () => {
 }
 
 /*The display is creates the markers and renders them in the map*/
+//https://developers.google.com/maps/documentation/javascript/markers
 display = () => {
 
   /*The map variable is created by establishing the lat and lng along with centering the appropriate zoom.
   The variable is then later used in creating multiple markers.*/
-  //https://developers.google.com/maps/documentation/javascript/markers
   let map = new window.google.maps.Map(document.getElementById('map'), {
     center: {lat: 32.2226, lng: -110.9747},
     zoom: 10
