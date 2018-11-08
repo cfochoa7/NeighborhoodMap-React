@@ -70,7 +70,7 @@ display = () => {
 /*The marker is established with the position taking in lat and lng from the venue's API.
 The same strategy is executed in taking in the name and address of the API and placing it in the marker.
 An addListener is implemented when clicked to display the limited animation along with the marker's name and address.
-The marker will then be inserted into the allMarkers array and updated in the state's 'markers' array
+The marker will then be inserted into the 'allMarkers' array and updated in the state's 'markers' array
 as well as the venue being returned.*/
       this.state.venues.map(venue => {
         var address = `${venue.venue.location.address  + '<br> <a href = "https://developer.foursquare.com/">Provided by FOURSQUARE'}`
@@ -152,7 +152,8 @@ handleClick = (venue) => {
 
      render() {
 
-/**/
+/*The 'set' variable deifines the input method which will allow the user to type the location in the search field.
+The 'onChange' targets the 'filterVenues'  */
       let set;
        set = <div className="search-area" id="search-box">
             <input
