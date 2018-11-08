@@ -112,11 +112,12 @@ filterVenues = search => {
     if (venue.venue.name.toLocaleLowerCase().startsWith(search.toLocaleLowerCase())) {
 
       access.markers.filter(marker => {
-        if (marker.title === venue.venue.name && true) {
-          marker.setVisible(true);
-          places[places.length] = venue;
-        } else {
+        if (marker.title !== venue.venue.name) {
           marker.setVisible(false);
+        } else if
+            (marker.title === venue.venue.name) {
+              marker.setVisible(true);
+              places[places.length] = venue;
         }
         return marker
       });
