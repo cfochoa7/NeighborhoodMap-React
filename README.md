@@ -5,12 +5,12 @@ In this project, the application borrows the map API from Google along with the 
 ## Axios
 This application uses Axios in order to make proper XMLHttpRequests. Please click [here](https://www.npmjs.com/package/axios) if you wish to git clone this project.
 
-## Instructions
-
-
 ## Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+
+## Instructions
+
 
 ## Resources
 
@@ -24,6 +24,8 @@ https://www.youtube.com/watch?v=5J6fs_BlVC0&t=3539s
 
 * Foursquare Developers (2018) Search for Venues
 https://developer.foursquare.com/docs/api/venues/search
+
+* Google Maps Platform https://developers.google.com/maps/documentation/javascript/markers
 
 
 
