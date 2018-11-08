@@ -153,7 +153,7 @@ handleClick = (venue) => {
      render() {
 
 /*The 'set' variable deifines the input method which will allow the user to type the location in the search field.
-The 'onChange' targets the 'filterVenues'  */
+The 'onChange' targets the 'filterVenues' and allows user to input and filter the results*/
       let set;
        set = <div className="search-area" id="search-box">
             <input
