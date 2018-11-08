@@ -71,3 +71,13 @@ html, body {
   background-color: grey;
   cursor: pointer;
 }
+
+@media only screen and (max-width: 450px) {
+  #search-box {
+    display: flex;
+    flex-wrap: wrap;
+    width: 190px;
+    margin-top: 246px;
+    font-size: 20px;
+  }
+}

@@ -3,25 +3,29 @@ import ListItem  from './ListItem';
 
 class VenueList extends Component {
   render() {
+
+    let connect = this.props;
+    let bridge;
+     bridge = <ul
+                  className = 'vList'>
+                  {connect.places &&
+                   connect.places.map( (venue) => (
+                    <ListItem
+                        key={venue.venue.name}
+                        venue={venue}
+                        /*Assisted by Mayguen Ojeda from FEND-proj-7*/
+                        click={ () =>
+                        connect.press(venue.venue)
+                        }
+                    />
+                    ))}
+                </ul>
+
     return (
       <div id= 'venueList'>
-        <ul className = 'vList'>
 
-        {this.props.searchedLocations &&
-        this.props.searchedLocations.map((venue, index) => (
+        {bridge}
 
-          <ListItem
-            key={venue.venue.name}
-            venue={venue}
-            /*Assisted by Mayguen Ojeda from FEND-proj-7*/
-            click={ () =>
-               this.props.press(venue.venue)
-             }
-          />
-
-        ))}
-
-        </ul>
       </div>
     );
   }

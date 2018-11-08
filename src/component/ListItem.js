@@ -2,17 +2,23 @@ import React, {Component} from 'react';
 
 class ListItem extends Component {
   render() {
+    
+let connect = this.props;
+let access;
+      access = <li
+                className="listItem"
+                tabIndex='0'
+                type='button'
+                aria-label='Place Location'
+                onClick={connect.click}
+              >
+                {connect.venue.venue.name}
+             </li>
+
     return (
       <div id= 'listItem'>
 
-        <li className="listItem"
-            tabIndex='0'
-            type='button'
-            aria-label='Place Location'
-            onClick={this.props.click}
-        >
-            {this.props.venue.venue.name}
-            </li>
+        {access}
 
       </div>
     )
