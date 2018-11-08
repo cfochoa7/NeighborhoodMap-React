@@ -26,8 +26,8 @@ The 3 arrays have the 5 locations stored within them and will accessed */
 .then() is used to return a promise that updates the state's venues and places witht the API and a .catch() is used if there is a error within that promise.*/
   getVenues = () => {
   axios.get('https://api.foursquare.com/v2/venues/explore?' + new URLSearchParams({
-    client_id: '#',
-    client_secret: '#',
+    client_id: 'Y4HOWLASE0FWJ23LPMWLWMINXCXXGS0F4HEN0RDJSVP1U40U',
+    client_secret: 'WOWYTORM2EP1JLDIO03SB1KMMYXO4BABEIMTSFBA55PJPCZT',
     query: 'attractions',
     limit: 6,
     near: 'Tucson',
@@ -47,7 +47,7 @@ The 3 arrays have the 5 locations stored within them and will accessed */
 /*The google API is used in the loadscript in order to render the map to the user. The display function will
 also render with the purpose of diplaying the markers with the appropriate information.*/
 map = () => {
-  loadScript("https://maps.googleapis.com/maps/api/js?key#&callback=display")
+  loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAQkHIBWjyRGJy2EsEu8DZ0jPBBvWC1b9s&callback=display")
   window.display = this.display
 }
 
@@ -103,7 +103,6 @@ as well as the venue being returned.*/
 }
 
 /**/
-// Look at !== for 115
 filterVenues = search => {
   const access = this.state;
   const places = [];
@@ -146,8 +145,8 @@ The user clicks on the venue in order to activate the marker's infoWindow on the
 //https://developers.google.com/maps/documentation/javascript/events
 handleClick = (venue) => {
   let access = window.google.maps.event;
-  
-//The .find() was suggested by Forrest Walker from FEND-proj-7 
+
+//The .find() was suggested by Forrest Walker from FEND-proj-7
   let marked = this.state.markers.find(marker => marker.title === venue.name);
   access.trigger(marked, 'click');
     }
