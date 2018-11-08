@@ -3,7 +3,7 @@
 In this project, the application borrows the map API from Google along with the location and address API from Foursquare. The map application displays a list that shows each attraction on the map. A search bar is provided in order to filter the location and map icon. 
 
 ## Axios
-This application uses Axios in order to make proper XMLHttpRequests. Please click [here](https://www.npmjs.com/package/axios) if you wish to git clone this project.
+This application uses Axios in order to make proper XMLHttpRequests. Please click [here](https://www.npmjs.com/package/axios) to install axios if you wish to git clone this project.
 
 ## Create React App
 
