@@ -145,7 +145,7 @@ filterVenues = search => {
 handleClick = (venue) => {
   let access = window.google.maps.event;
   
-//The .find() was suggested by Forrest Walker from fend proj_7  
+//The .find() was suggested by Forrest Walker from FEND-proj-7 
   let marked = this.state.markers.find(marker => marker.title === venue.name);
   access.trigger(marked, 'click');
     }
