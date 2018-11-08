@@ -28,8 +28,8 @@ The 3 arrays have the 5 locations stored within them and will accessed */
 //https://www.npmjs.com/package/axios
 //https://developer.foursquare.com/docs/api/venues/search
   axios.get('https://api.foursquare.com/v2/venues/explore?' + new URLSearchParams({
-    client_id: 'Y4HOWLASE0FWJ23LPMWLWMINXCXXGS0F4HEN0RDJSVP1U40U',
-    client_secret: 'WOWYTORM2EP1JLDIO03SB1KMMYXO4BABEIMTSFBA55PJPCZT',
+    client_id: '#',
+    client_secret: '#',
     query: 'attractions',
     limit: 6,
     near: 'Tucson',
@@ -49,7 +49,7 @@ The 3 arrays have the 5 locations stored within them and will accessed */
 /*The google API is used in the loadscript in order to render the map to the user. The display function will
 also render with the purpose of diplaying the markers with the appropriate information.*/
 map = () => {
-  loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAQkHIBWjyRGJy2EsEu8DZ0jPBBvWC1b9s&callback=display")
+  loadScript("https://maps.googleapis.com/maps/api/js?key&callback=display")
   window.display = this.display
 }
 
