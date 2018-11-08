@@ -87,7 +87,7 @@ The same strategy is executed in taking in the name and address of the API and p
 
         marker.addListener('click', () => {
           marker.setAnimation(window.google.maps.Animation.BOUNCE);
-          window.setTimeout(() => marker.setAnimation(false),  500);
+          window.setTimeout(marker.setAnimation(false), 500);
 
           infowindow.setContent('<b>' + contentString + '</b> <br>'  + address);
           infowindow.open(map, marker);
