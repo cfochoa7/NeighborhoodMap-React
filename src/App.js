@@ -25,8 +25,6 @@ The 3 arrays have the 5 locations stored within them and will accessed */
 'attractions' that are known locally to the city, along with the 'limit' that sets the number of attractions.
 .then() is used to return a promise that updates the state's venues and places witht the API and a .catch() is used if there is a error within that promise.*/
   getVenues = () => {
-//https://www.npmjs.com/package/axios
-//https://developer.foursquare.com/docs/api/venues/search
   axios.get('https://api.foursquare.com/v2/venues/explore?' + new URLSearchParams({
     client_id: '#',
     client_secret: '#',
@@ -49,7 +47,7 @@ The 3 arrays have the 5 locations stored within them and will accessed */
 /*The google API is used in the loadscript in order to render the map to the user. The display function will
 also render with the purpose of diplaying the markers with the appropriate information.*/
 map = () => {
-  loadScript("https://maps.googleapis.com/maps/api/js?key&callback=display")
+  loadScript("https://maps.googleapis.com/maps/api/js?key#&callback=display")
   window.display = this.display
 }
 
@@ -57,8 +55,8 @@ map = () => {
 //https://developers.google.com/maps/documentation/javascript/markers
 display = () => {
 
-  /*The map variable is created by establishing the lat and lng along with centering the appropriate zoom.
-  The variable is then later used in creating multiple markers.*/
+/*The map variable is created by establishing the lat and lng along with centering the appropriate zoom.
+The variable is then later used in creating multiple markers.*/
   let map = new window.google.maps.Map(document.getElementById('map'), {
     center: {lat: 32.2226, lng: -110.9747},
     zoom: 10
@@ -105,6 +103,7 @@ as well as the venue being returned.*/
 }
 
 /**/
+//
 filterVenues = search => {
   const access = this.state;
   const places = [];
@@ -112,7 +111,6 @@ filterVenues = search => {
   access.venues.map(venue => {
     if (venue.venue.name.toLocaleLowerCase().startsWith(search.toLocaleLowerCase())) {
 
-//
       access.markers.filter(marker => {
         if (marker.title === venue.venue.name && true) {
           marker.setVisible(true);
@@ -146,6 +144,8 @@ filterVenues = search => {
 //https://developers.google.com/maps/documentation/javascript/events
 handleClick = (venue) => {
   let access = window.google.maps.event;
+  
+//The .find() was suggested by Forrest Walker from fend proj_7  
   let marked = this.state.markers.find(marker => marker.title === venue.name);
   access.trigger(marked, 'click');
     }
