@@ -19,7 +19,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Resources
 
-Special thanks to **Jason Michael White [FEND] Project Coach**, **Forrest Walker from FEND-proj-7** & **Mayguen Ojeda from FEND-proj-7** along the Udacity community for providing guidance on this project.
+Special thanks to **Jason Michael White [FEND] Project Coach**, **Forrest Walker from FEND-proj-7**, **Forrest Walker from FEND-proj-7** & **Mayguen Ojeda from FEND-proj-7** along the Udacity community for providing guidance on this project.
 
 * Elharony, Yahya (2018) Udacity | Neighborhood Map [2] - Add Google Maps to React App [Without Any External Components]
 https://www.youtube.com/watch?v=dAhMIF0fNpo&list=PLgOB68PvvmWCGNn8UMTpcfQEiITzxEEA1&index=3
