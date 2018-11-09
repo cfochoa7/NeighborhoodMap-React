@@ -29,6 +29,7 @@ The 3 arrays will have the 6 locations stored within them in order to be accesse
     client_id: 'Y4HOWLASE0FWJ23LPMWLWMINXCXXGS0F4HEN0RDJSVP1U40U',
     client_secret: 'WOWYTORM2EP1JLDIO03SB1KMMYXO4BABEIMTSFBA55PJPCZT',
     query: 'attractions',
+    url: 'https://foursquare.com/explore?mode=url&near=Tucson%2C%20AZ&nearGeoId=72057594043246249&q=attractions',
     limit: 6,
     near: 'Tucson',
     v: '20182210'
@@ -71,7 +72,7 @@ An addListener is implemented when clicked to display the limited animation alon
 The marker will then be inserted into the 'allMarkers' array and updated in the state's 'markers' array
 as well as the venue being returned.*/
       this.state.venues.map(venue => {
-        var address = `${venue.venue.location.address  + '<br> <a href = "https://developer.foursquare.com/">Provided by FOURSQUARE'}`
+        var address = `${venue.venue.location.address  + '<br> <a href = "https://foursquare.com/explore?mode=url&near=Tucson%2C%20AZ&nearGeoId=72057594043246249&q=attractions">Provided by FOURSQUARE'}`
         var contentString = `${venue.venue.name}`
         var marker = new window.google.maps.Marker({
           position: {lat: venue.venue.location.lat , lng: venue.venue.location.lng},

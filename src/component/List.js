@@ -11,7 +11,7 @@ let access;
                 className="list"
                 tabIndex='0'
                 type='button'
-                aria-label='Place Location'
+                aria-label='List Location'
                 onClick={connect.click}
               >
                 {connect.venue.venue.name}
