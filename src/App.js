@@ -186,9 +186,7 @@ The 'onChange' targets the 'filterVenues' and allows user to input and filter th
                <header className="app-header">
                   <h1 className="app-title">Old Pueblo Guide</h1>
                </header>
-
             {set}
-
            </div>
     )
   }
