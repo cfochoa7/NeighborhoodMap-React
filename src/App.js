@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import VenueList from './component/VenueList';
+import Venue from './component/Venue';
 import './App.css';
 import axios from 'axios';
 
 class App extends Component {
 /*A state is created with the 'search' meant to record the user's input.
-The 3 arrays have the 5 locations stored within them and will accessed */
+The 3 arrays will have the 6 locations stored within them in order to be accessed.*/
   constructor(props) {
     super(props);
     this.state = {
@@ -16,14 +16,14 @@ The 3 arrays have the 5 locations stored within them and will accessed */
     }
   };
 
-  /*The componentDidMount() is called giving API requests from foursquare in order to display locations*/
+  /*The componentDidMount() is called giving API requests from this.getVeneus in order to display locations*/
   componentDidMount() {
     this.getVenues()
   }
 
 /*The 'getVeneus' uses client_id and a client_secret as to allow access to the API. The 'query' sets the category of
 'attractions' that are known locally to the city, along with the 'limit' that sets the number of attractions.
-.then() is used to return a promise that updates the state's venues and places witht the API and a .catch() is used if there is a error within that promise.*/
+.then() is used to return a promise that updates the state's venues and places with the API and a .catch() is used if there is a error within that promise.*/
   getVenues = () => {
   axios.get('https://api.foursquare.com/v2/venues/explore?' + new URLSearchParams({
     client_id: 'Y4HOWLASE0FWJ23LPMWLWMINXCXXGS0F4HEN0RDJSVP1U40U',
@@ -88,7 +88,6 @@ as well as the venue being returned.*/
         marker.addListener('click', () => {
           marker.setAnimation(window.google.maps.Animation.BOUNCE);
           window.setTimeout(marker.setAnimation(false), 500);
-
           infowindow.setContent('<b>' + contentString + '</b> <br>'  + address);
           infowindow.open(map, marker);
         });
@@ -102,7 +101,14 @@ as well as the venue being returned.*/
       });
 }
 
-/**/
+/*The filterVenues is used to filter the venue list when the user types in the search bar.
+The .startsWith() is used to compare the first letter the user types in to match the venue's name.
+The venue's name will then be matched with the marker on the map. Then the venue will be inserted in the 'places' array.
+This gives it the ability to be updated in the state thus displying it to the user.
+For any venues that do not match the user's input will make the venue list and markers on the map disapear.*/
+
+//filterVenues function was partially assisted from Jason Michael White [FEND] Project Coach and
+//influenced by https://www.youtube.com/watch?v=5J6fs_BlVC0&t=3539s
 filterVenues = search => {
   const access = this.state;
   const places = [];
@@ -120,7 +126,6 @@ filterVenues = search => {
         }
         return marker
       });
-
       this.setState({
         search, places
       });
@@ -141,7 +146,7 @@ The markers will reappear to the user through the use of '.some()'.*/
 };
 
 /*The handleClick function will will use 'window.google.maps.event' that will match the listed venue's name with the marker's title.
-The user clicks on the venue in order to activate the marker's infoWindow on the map.*/ //.some with return and {}
+The user clicks on the venue in order to activate the marker's infoWindow on the map.*/
 //https://developers.google.com/maps/documentation/javascript/events
 handleClick = (venue) => {
   let access = window.google.maps.event;
@@ -153,7 +158,7 @@ handleClick = (venue) => {
 
      render() {
 
-/*The 'set' variable deifines the input method which will allow the user to type the location in the search field.
+/*The 'set' variable defines the input method which will allow the user to type the location in the search field.
 The 'onChange' targets the 'filterVenues' and allows user to input and filter the results*/
       let set;
        set = <div className="search-area" id="search-box">
@@ -168,7 +173,7 @@ The 'onChange' targets the 'filterVenues' and allows user to input and filter th
                              this.filterVenues(e.target.value);
                            }}
              />
-              <VenueList
+              <Venue
               press={this.handleClick}
                     {...this.state}
                />
@@ -188,7 +193,7 @@ The 'onChange' targets the 'filterVenues' and allows user to input and filter th
   }
 }
 
-/**/
+/*The function creates the loadScript(url) which will allow the API key to be rendered within the map*/
 //https://www.youtube.com/watch?v=W5LhLZqj76s&list=PLgOB68PvvmWCGNn8UMTpcfQEiITzxEEA1
 function loadScript(url) {
   var index  = window.document.getElementsByTagName("script")[0]

@@ -49,16 +49,16 @@ html, body {
 
 }
 
-#venueList {
+#venue {
   margin-left: -40px;
   margin-top: -20px;
 }
 
-#listItem {
+#list {
   margin: 0;
 }
 
-#listItem li {
+#list li {
   border: 1px solid black;
   background-color: white;
   padding: 5px;
@@ -67,7 +67,7 @@ html, body {
   list-style: none;
 }
 
-#listItem li:hover:not(.header) {
+#list li:hover:not(.header) {
   background-color: grey;
   cursor: pointer;
 }
@@ -76,8 +76,10 @@ html, body {
   #search-box {
     display: flex;
     flex-wrap: wrap;
-    width: 190px;
-    margin-top: 246px;
+    width: 140px;
     font-size: 20px;
+  }
+  #search {
+    width: 186px;
   }
 }
