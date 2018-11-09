@@ -10,7 +10,11 @@ This application uses Axios in order to make proper XMLHttpRequests. Please clic
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
 ## Instructions
-
+*Use npm install in order to install the proper dependecies (Be careful not to install dependecies globally)
+*Make sure that the dependecies are located in the proper section with the package.json file
+*Git clone the file
+*Start the development server with npm start
+*Once running the application will display showing a map with markers along with a search bar that will filter the places
 
 ## Resources
 
