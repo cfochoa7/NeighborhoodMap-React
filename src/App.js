@@ -17,7 +17,7 @@ The 3 arrays will have the 6 locations stored within them in order to be accesse
   };
 
 /*The componentDidMount() is called giving API requests from this.getVeneus in order to display locations.
-The 'window.gm_authFailure will notify the user if there is a an error when loading the map.'*/
+The 'window.gm_authFailure' will notify the user if there is a an error when loading the map.*/
   componentDidMount() {
     this.getVenues()
     window.gm_authFailure = () => {
