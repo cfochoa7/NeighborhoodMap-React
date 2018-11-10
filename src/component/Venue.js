@@ -10,6 +10,7 @@ The 'click' will have the data passed from the venue.venue and link it with the 
     let connect = this.props;
     let bridge;
      bridge = <ul
+                  aria-label='Venue'
                   className = 'vList'>
                   {connect.places &&
                    connect.places.map( (venue) => (
