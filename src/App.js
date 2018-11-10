@@ -186,7 +186,7 @@ The 'onChange' targets the 'filterVenues' and allows user to input and filter th
 
        return (
          <div>
-           <div id="map" />
+           <div id="map" role="application" />
                <header className="app-header">
                   <h1 className="app-title">Old Pueblo Guide</h1>
                </header>
